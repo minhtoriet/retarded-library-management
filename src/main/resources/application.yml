@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: demo
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: ${NEON_POOLED_URL}
+    username: ${NEON_USER}
+    password: ${NEON_PASSWORD}
+    hikari:
+      maximum-pool-size: 5
+      max-lifetime: 600000
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  # Only add this block once you add Flyway:
+  # flyway:
+  #   url: ${NEON_UNPOOLED_URL}
+  #   user: ${NEON_USER}
+  #   password: ${NEON_PASSWORD}
