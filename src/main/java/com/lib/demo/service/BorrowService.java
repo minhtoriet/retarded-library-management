@@ -63,12 +63,13 @@ public class BorrowService {
 
     @Transactional
     public void returnBook(BorrowRequest request){
-        User user = userRepo.findById(request.userId())
-                .orElseThrow(() -> new NoSuchElementException("user " + request.userId() + " not found"));
-        Book book = bookRepo.findById(request.bookId())
-                .orElseThrow(() -> new NoSuchElementException("book " + request.userId() + " not found"));
+        BorrowRecord record = borrowRepo
+                    .findByUser_UserIdAndBook_BookIdAndReturnDateIsNull(request.userId(), request.bookId())
+                    .orElseThrow(() -> new NoSuchElementException("no active borrow for such user or/and book"));
+    
+        record.setReturnDate(LocalDate.now());
+        Book book = record.getBook();
         book.setAvailableCopies(book.getAvailableCopies() + 1);
-        
 
     }
 }

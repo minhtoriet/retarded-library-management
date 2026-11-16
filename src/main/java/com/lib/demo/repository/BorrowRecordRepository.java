@@ -4,6 +4,8 @@ import com.lib.demo.dto.BorrowHistoryDto;
 import com.lib.demo.dto.TopBookDto;
 import com.lib.demo.model.BorrowRecord;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,5 +33,5 @@ public interface BorrowRecordRepository extends JpaRepository<BorrowRecord, Long
     boolean existsByUser_UserIdAndBook_BookIdAndReturnDateIsNull(Long userId, Long bookId);
 
     // find by userId and bookId and returnDate is null
-    
+    Optional<BorrowRecord> findByUser_UserIdAndBook_BookIdAndReturnDateIsNull(Long userId, Long bookId);
 }
