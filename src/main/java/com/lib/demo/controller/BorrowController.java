@@ -10,8 +10,11 @@ import com.lib.demo.service.BorrowService;
 
 import jakarta.validation.Valid;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +37,7 @@ public class BorrowController {
     }
     
     @GetMapping("/user/{userId}/borrows")
-    public ResponseEntity<Page<BorrowHistoryDto>> history(@PathVariable Long userId, Pageable pageable) {
+    public ResponseEntity<Page<BorrowHistoryDto>> history(@PathVariable Long userId, @ParameterObject @PageableDefault(size=20,sort="borrowDate",direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(borrowService.historyForUser(userId, pageable));
     }
     

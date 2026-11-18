@@ -58,6 +58,9 @@ public class BorrowService {
 
     @Transactional(readOnly = true)
     public Page<BorrowHistoryDto> historyForUser(Long userId, Pageable pageable) {
+         if (!userRepo.existsById(userId)) {
+            throw new NoSuchElementException("user not found");
+         }
         return borrowRepo.findBorrowHistoryByUserId(userId, pageable);
     }
 

@@ -20,6 +20,3 @@ public class Lecturer extends User{
     private Department department;
 }
 
-enum Department {
-    CIT, BBS, SET, SNS
-}

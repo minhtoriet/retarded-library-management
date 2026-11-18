@@ -14,8 +14,21 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 100  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info
+  endpoint:
+    health:
+      show-details: when-authorized
   # Only add this block once you add Flyway:
   # flyway:
   #   url: ${NEON_UNPOOLED_URL}
   #   user: ${NEON_USER}
   #   password: ${NEON_PASSWORD}
+  

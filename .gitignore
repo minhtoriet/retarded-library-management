@@ -32,5 +32,12 @@ build/
 ### VS Code ###
 .vscode/
 
+### environment variable ###
 .env
+
+### macos ###
 .DS_Store
+
+### JMeter ###
+report-*/
+*.jtl
